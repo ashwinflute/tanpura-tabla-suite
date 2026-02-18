@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluteschool Suite v2.5</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="appContainer" class="container loading">
+        <h1>Fluteschool Suite <small style="font-size: 0.5rem; vertical-align: middle;">v2.5</small></h1>
+        
+        <div class="mixer">
+            <div class="channel-strip">
+                <button id="t1Btn" class="chan-btn" disabled>Tanpura 1</button>
+                <div class="tuning-row">
+                    <div class="control-group">
+                        <label>Note 1</label>
+                        <select id="t1Tune1" class="mini-select">
+                            <option value="7" selected>Pa</option><option value="0">Sa</option><option value="1">re</option><option value="2">Re</option><option value="3">ga</option><option value="4">Ga</option><option value="5">Ma</option><option value="6">ma</option><option value="8">dha</option><option value="9">Dha</option><option value="10">ni</option><option value="11">Ni</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Note 2</label>
+                        <select id="t1Tune2" class="mini-select">
+                            <option value="none">OFF</option><option value="0" selected>Sa (Low)</option><option value="1">re</option><option value="2">Re</option><option value="3">ga</option><option value="4">Ga</option><option value="5">Ma</option><option value="6">ma</option><option value="7">Pa</option><option value="8">dha</option><option value="9">Dha</option><option value="10">ni</option><option value="11">Ni</option><option value="12">Sa (High)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Pan</label>
+                    <input type="range" id="pan1" min="-1" max="1" step="0.01" value="-0.6">
+                    <span id="pan1Value">L30</span>
+                </div>
+            </div>
+
+            <div class="channel-strip">
+                <button id="t2Btn" class="chan-btn" disabled>Tanpura 2</button>
+                <div class="tuning-row">
+                    <div class="control-group">
+                        <label>Note 1</label>
+                        <select id="t2Tune1" class="mini-select">
+                            <option value="7" selected>Pa</option><option value="0">Sa</option><option value="1">re</option><option value="2">Re</option><option value="3">ga</option><option value="4">Ga</option><option value="5">Ma</option><option value="6">ma</option><option value="8">dha</option><option value="9">Dha</option><option value="10">ni</option><option value="11">Ni</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Note 2</label>
+                        <select id="t2Tune2" class="mini-select">
+                            <option value="none">OFF</option><option value="0" selected>Sa (Low)</option><option value="1">re</option><option value="2">Re</option><option value="3">ga</option><option value="4">Ga</option><option value="5">Ma</option><option value="6">ma</option><option value="7">Pa</option><option value="8">dha</option><option value="9">Dha</option><option value="10">ni</option><option value="11">Ni</option><option value="12">Sa (High)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label>Pan</label>
+                    <input type="range" id="pan2" min="-1" max="1" step="0.01" value="0.6">
+                    <span id="pan2Value">R30</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="middle-row">
+            <div class="control-group compact">
+                <label>Key</label>
+                <select id="scaleSelect">
+                    <option value="C">C</option><option value="C#">C#</option><option value="D">D</option><option value="D#">D#</option><option value="E" selected>E</option><option value="F">F</option><option value="F#">F#</option><option value="G">G</option><option value="G#">G#</option><option value="A">A</option><option value="A#">A#</option><option value="B">B</option>
+                </select>
+            </div>
+            <div class="control-group flex-grow">
+                <label>Fine Tuning</label>
+                <input type="range" id="tuneSlider" min="0" max="50" value="0">
+                <span id="tuneValue">+0 cents</span>
+            </div>
+        </div>
+
+        <div class="tabla-module">
+            <div class="middle-row" style="border-top:none; margin-top:-10px;">
+                <button id="tablaBtn" class="chan-btn" style="width:120px; margin-bottom:0;">Tabla Start</button>
+                <div class="control-group flex-grow">
+                    <label>Taal</label>
+                    <select id="taalSelect">
+                        <option value="TEENTAAL">Teentaal (16)</option>
+                        <option value="DADRA">Dadra (6)</option>
+                        <option value="ROOPAK">Roopak (7)</option>
+                        <option value="JHAPTAL">Jhaptaal (10)</option>
+                        <option value="EKTAL">Ektal (12)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="bottom-row">
+                <div class="control-group mini fader-track"><label>Tabla BPM</label><input type="range" id="tablaTempo" min="40" max="320" value="80"><span id="tablaTempoValue">80 BPM</span></div>
+                <div class="control-group mini fader-track"><label>Bayan Vol</label><input type="range" id="bayanVol" min="-40" max="0" value="-6"><span id="bayanVolValue">-6 dB</span></div>
+            </div>
+        </div>
+
+        <div class="bottom-row" style="margin-top:15px; border-top: 1px solid #e0d9d0; padding-top:10px;">
+            <div class="control-group mini fader-track"><label>Drone Tempo</label><input type="range" id="tempoSlider" min="70" max="100" value="78"><span id="tempoValue">78 BPM</span></div>
+            <div class="control-group mini fader-track"><label>Master Vol</label><input type="range" id="volSlider" min="-40" max="0" value="-12"><span id="volValue">-12 dB</span></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
